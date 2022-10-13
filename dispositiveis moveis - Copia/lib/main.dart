@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:navegacao_telas/components/ListaPessoa.dart';
+import 'package:navegacao_telas/models/Pessoa.dart';
 
 import 'ClasseA.dart';
 
 void main() {
+ 
   runApp(const MyApp());
 }
 
@@ -12,6 +15,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+     var listaPessoa = <Pessoa>[
+      Pessoa("Guilherme", "gui", 20),
+      Pessoa("Luana", "Lu", 20),
+      Pessoa("joao junio", "jj", 70),
+    ];
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -26,7 +34,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: TelaA(),
+      home:Scaffold(
+      appBar: AppBar(
+        title: Text('TelaA')),
+        body: Center(
+          child:ListaPessoa.createElement(listaPessoa)
+        ))
     );
   }
 }
