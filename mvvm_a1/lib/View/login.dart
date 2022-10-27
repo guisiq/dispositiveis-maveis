@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'form.dart';
+import 'package:mvvm_a1/viewModel/viewModel.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,6 +10,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
 
+  String email = "";
+  String senha= "";
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +25,9 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 TextField(
                     autofocus: true,
+                    onChanged: (String value){
+                      email = value;
+                    },
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: Colors.blue, fontSize: 30),
                     decoration: InputDecoration(
@@ -31,6 +37,9 @@ class _LoginState extends State<Login> {
                 ),
                 TextField(
                     autofocus: true,
+                    onChanged: (String value){
+                      senha = value;
+                    },
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: Colors.blue, fontSize: 30),
@@ -42,14 +51,18 @@ class _LoginState extends State<Login> {
                 ButtonTheme(
                   height: 60.0,
                   child: FloatingActionButton(
-                    onPressed: () => {Navigator.push(context, MaterialPageRoute(builder:
-                (context) => FormFood()))},
+                    onPressed: () => {
+                      if(ViewModel.login(email, senha)){
+                        Navigator.push(context, MaterialPageRoute(builder:
+                            (context) => FormFood()))
+                      }
+                    },
                     shape: new RoundedRectangleBorder(borderRadius:
                     new BorderRadius.circular(30.0)),
                     child: Text(
                       "Entrar",
                       style: TextStyle(color: Colors.white, fontSize: 30),
-                    ), 
+                    ),
                   ),
                 )
               ],
